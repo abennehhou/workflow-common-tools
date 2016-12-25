@@ -76,9 +76,10 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Activities\SaveAccount.cs" />
+    <Compile Include="Activities\CreateAccount.cs" />
     <Compile Include="DependencyInjection\DependencyInjectionBehaviorExtensionElement.cs" />
     <Compile Include="DependencyInjection\UnityTypeRegistration.cs" />
+    <Compile Include="Models\Account.cs" />
     <Compile Include="Services\AccountService.cs" />
     <Compile Include="Services\IAccountService.cs" />
     <Content Include="Web.config" />

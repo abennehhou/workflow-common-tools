@@ -1,12 +1,21 @@
 ﻿using System;
+using MyWorkflowService.Models;
 
 namespace MyWorkflowService.Services
 {
     public class AccountService : IAccountService
     {
-        public void SaveAccount(string name)
+        public Account CreateAccount(string name)
         {
-            Console.WriteLine($"Saving account: '{name}'.");
+            var account = new Account
+            {
+                Id = Guid.NewGuid(),
+                Name = name
+            };
+
+            Console.WriteLine($"Creating account: '{name}'.");
+
+            return account;
         }
     }
 }

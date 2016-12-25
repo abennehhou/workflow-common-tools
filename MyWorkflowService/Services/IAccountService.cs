@@ -1,7 +1,9 @@
-﻿namespace MyWorkflowService.Services
+﻿using MyWorkflowService.Models;
+
+namespace MyWorkflowService.Services
 {
     public interface IAccountService
     {
-        void SaveAccount(string name);
+        Account CreateAccount(string name);
     }
 }

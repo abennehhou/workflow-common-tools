@@ -3,6 +3,7 @@
  xmlns:ma="clr-namespace:MyWorkflowService.Activities;assembly=MyWorkflowService"
  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
  xmlns:mca="clr-namespace:Microsoft.CSharp.Activities;assembly=System.Activities"
+ xmlns:mm="clr-namespace:MyWorkflowService.Models;assembly=MyWorkflowService"
  xmlns:p="http://tempuri.org/"
  xmlns:p1="http://schemas.microsoft.com/netfx/2009/xaml/activities"
  xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
@@ -19,11 +20,17 @@
         <x:String>System.Data</x:String>
         <x:String>System.Linq</x:String>
         <x:String>System.Text</x:String>
+        <x:String>MyWorkflowService.Models</x:String>
       </sco:Collection>
     </p1:TextExpression.Namespaces>
     <p1:TextExpression.References>
       <sco:Collection x:TypeArguments="p1:AssemblyReference" x:Name="__ReferenceID2">
         <p1:AssemblyReference>Microsoft.CSharp</p1:AssemblyReference>
+        <p1:AssemblyReference>Microsoft.Practices.ServiceLocation</p1:AssemblyReference>
+        <p1:AssemblyReference>Microsoft.Practices.Unity</p1:AssemblyReference>
+        <p1:AssemblyReference>Microsoft.Practices.Unity.Configuration</p1:AssemblyReference>
+        <p1:AssemblyReference>Microsoft.Practices.Unity.RegistrationByConvention</p1:AssemblyReference>
+        <p1:AssemblyReference>System.Configuration</p1:AssemblyReference>
         <p1:AssemblyReference>System.Web.DynamicData</p1:AssemblyReference>
         <p1:AssemblyReference>System.Drawing</p1:AssemblyReference>
         <p1:AssemblyReference>System.Web.Entity</p1:AssemblyReference>
@@ -42,20 +49,16 @@
         <p1:AssemblyReference>System.Xml</p1:AssemblyReference>
         <p1:AssemblyReference>System.Xml.Linq</p1:AssemblyReference>
         <p1:AssemblyReference>WorkflowCommonTools</p1:AssemblyReference>
-        <p1:AssemblyReference>Microsoft.Practices.ServiceLocation</p1:AssemblyReference>
-        <p1:AssemblyReference>Microsoft.Practices.Unity.Configuration</p1:AssemblyReference>
-        <p1:AssemblyReference>Microsoft.Practices.Unity</p1:AssemblyReference>
-        <p1:AssemblyReference>Microsoft.Practices.Unity.RegistrationByConvention</p1:AssemblyReference>
-        <p1:AssemblyReference>System.Configuration</p1:AssemblyReference>
         <p1:AssemblyReference>mscorlib</p1:AssemblyReference>
         <p1:AssemblyReference>MyWorkflowService</p1:AssemblyReference>
       </sco:Collection>
     </p1:TextExpression.References>
     <p1:Sequence.Variables>
       <p1:Variable x:TypeArguments="CorrelationHandle" Name="handle" />
-      <p1:Variable x:TypeArguments="x:String" Name="data" />
+      <p1:Variable x:TypeArguments="x:String" Name="name" />
+      <p1:Variable x:TypeArguments="mm:Account" Name="account" />
     </p1:Sequence.Variables>
-    <Receive x:Name="__ReferenceID0" CanCreateInstance="True" DisplayName="ReceiveRequest" sap2010:WorkflowViewState.IdRef="Receive_1" OperationName="GetData" ServiceContractName="p:IService">
+    <Receive x:Name="__ReferenceID0" CanCreateInstance="True" DisplayName="ReceiveRequest" sap2010:WorkflowViewState.IdRef="Receive_1" OperationName="CreateAccount" ServiceContractName="p:IService">
       <Receive.CorrelationInitializers>
         <RequestReplyCorrelationInitializer>
           <RequestReplyCorrelationInitializer.CorrelationHandle>
@@ -67,30 +70,35 @@
       </Receive.CorrelationInitializers>
       <ReceiveMessageContent>
         <p1:OutArgument x:TypeArguments="x:String">
-          <mca:CSharpReference x:TypeArguments="x:String">data</mca:CSharpReference>
+          <mca:CSharpReference x:TypeArguments="x:String">name</mca:CSharpReference>
         </p1:OutArgument>
       </ReceiveMessageContent>
     </Receive>
-    <ma:SaveAccount sap2010:WorkflowViewState.IdRef="SaveAccount_1">
-      <ma:SaveAccount.Name>
+    <ma:CreateAccount sap2010:WorkflowViewState.IdRef="CreateAccount_1">
+      <ma:CreateAccount.Account>
+        <p1:OutArgument x:TypeArguments="mm:Account">
+          <mca:CSharpReference x:TypeArguments="mm:Account">account</mca:CSharpReference>
+        </p1:OutArgument>
+      </ma:CreateAccount.Account>
+      <ma:CreateAccount.Name>
         <p1:InArgument x:TypeArguments="x:String">
-          <mca:CSharpValue x:TypeArguments="x:String">data</mca:CSharpValue>
+          <mca:CSharpValue x:TypeArguments="x:String">name</mca:CSharpValue>
         </p1:InArgument>
-      </ma:SaveAccount.Name>
-    </ma:SaveAccount>
+      </ma:CreateAccount.Name>
+    </ma:CreateAccount>
     <SendReply Request="{x:Reference __ReferenceID0}" DisplayName="SendResponse" sap2010:WorkflowViewState.IdRef="SendReply_1">
       <SendMessageContent>
         <p1:InArgument x:TypeArguments="x:String">
-          <mca:CSharpValue x:TypeArguments="x:String">data.ToString()</mca:CSharpValue>
+          <mca:CSharpValue x:TypeArguments="x:String">account == null ? null : account.Id.ToString()</mca:CSharpValue>
         </p1:InArgument>
       </SendMessageContent>
     </SendReply>
-    <sads:DebugSymbol.Symbol>d0BEOlxHaXRodWJcd29ya2Zsb3ctY29tbW9uLXRvb2xzXE15V29ya2Zsb3dTZXJ2aWNlXFNlcnZpY2UxLnhhbWx4CA4DWREBAToFSQ8BEEoFUBYBDFEFVxEBAkYLRlUBFD8PP1wBEU0LTU0BDVQLVFgBAw==</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>d0BEOlxHaXRodWJcd29ya2Zsb3ctY29tbW9uLXRvb2xzXE15V29ya2Zsb3dTZXJ2aWNlXFNlcnZpY2UxLnhhbWx4CQ8DYREBAT0FTA8BGE0FWBgBD1kFXxEBAkkLSVUBHUIPQlwBGVALUFoBFFULVU0BEFwLXHcBAw==</sads:DebugSymbol.Symbol>
   </p1:Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
       <sap2010:ViewStateData Id="Receive_1" sap:VirtualizedContainerService.HintSize="255,90" />
-      <sap2010:ViewStateData Id="SaveAccount_1" sap:VirtualizedContainerService.HintSize="255,22" />
+      <sap2010:ViewStateData Id="CreateAccount_1" sap:VirtualizedContainerService.HintSize="255,22" />
       <sap2010:ViewStateData Id="SendReply_1" sap:VirtualizedContainerService.HintSize="255,90" />
       <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="277,406">
         <sap:WorkflowViewStateService.ViewState>

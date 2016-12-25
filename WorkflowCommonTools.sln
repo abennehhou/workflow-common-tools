@@ -7,6 +7,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkflowCommonTools", "Work
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyWorkflowService", "MyWorkflowService\MyWorkflowService.csproj", "{F262BB0A-8CA9-4DE7-8B06-ADA38AEDD28E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{51069901-C137-435E-8591-59C433A2EA08}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyWorkflowServiceUnitTests", "MyWorkflowServiceUnitTests\MyWorkflowServiceUnitTests.csproj", "{5EC77F53-0444-466F-B596-9BF86793014C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +28,10 @@ Global
 		{F262BB0A-8CA9-4DE7-8B06-ADA38AEDD28E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F262BB0A-8CA9-4DE7-8B06-ADA38AEDD28E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F262BB0A-8CA9-4DE7-8B06-ADA38AEDD28E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EC77F53-0444-466F-B596-9BF86793014C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EC77F53-0444-466F-B596-9BF86793014C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EC77F53-0444-466F-B596-9BF86793014C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EC77F53-0444-466F-B596-9BF86793014C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
