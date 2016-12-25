@@ -11,7 +11,8 @@ The solution contains three projects:
 - MyWorkflowServiceUnitTests: Unit test project for the workflow service.
 
 # Current features
-- Dependency injection
+- Dependency injection using Unity
+- Logging activity using log4net
 
 # Next steps
-- Add features: global exception handling, loggging...
+- Add global exception handling

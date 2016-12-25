@@ -1,0 +1,132 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="MyWorkflowService.Activities.CreateAccountActivity"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:local="clr-namespace:MyWorkflowService.Models"
+ xmlns:local1="clr-namespace:MyWorkflowService.Activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mca="clr-namespace:Microsoft.CSharp.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:sd="clr-namespace:System.Diagnostics;assembly=System"
+ xmlns:wa="clr-namespace:WorkflowCommonTools.Activities;assembly=WorkflowCommonTools"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="Name" Type="InArgument(x:String)" />
+    <x:Property Name="Account" Type="OutArgument(local:Account)" />
+  </x:Members>
+  <sap2010:ExpressionActivityEditor.ExpressionActivityEditor>C#</sap2010:ExpressionActivityEditor.ExpressionActivityEditor>
+  <sap2010:WorkflowViewState.IdRef>MyWorkflowService.Activities.CreateAccountActivity_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Text</x:String>
+      <x:String>MyWorkflowService.Models</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.CSharp</AssemblyReference>
+      <AssemblyReference>Microsoft.Practices.ServiceLocation</AssemblyReference>
+      <AssemblyReference>Microsoft.Practices.Unity</AssemblyReference>
+      <AssemblyReference>Microsoft.Practices.Unity.Configuration</AssemblyReference>
+      <AssemblyReference>Microsoft.Practices.Unity.RegistrationByConvention</AssemblyReference>
+      <AssemblyReference>System.Configuration</AssemblyReference>
+      <AssemblyReference>System.Web.DynamicData</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Web.Entity</AssemblyReference>
+      <AssemblyReference>System.Web.ApplicationServices</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Entity</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ServiceModel.Activities</AssemblyReference>
+      <AssemblyReference>System.ServiceModel.Channels</AssemblyReference>
+      <AssemblyReference>System.Web</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>WorkflowCommonTools</AssemblyReference>
+      <AssemblyReference>log4net</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>MyWorkflowService</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <If sap2010:WorkflowViewState.IdRef="If_1">
+      <If.Condition>
+        <InArgument x:TypeArguments="x:Boolean">
+          <mca:CSharpValue x:TypeArguments="x:Boolean">string.IsNullOrWhiteSpace(Name)</mca:CSharpValue>
+        </InArgument>
+      </If.Condition>
+      <If.Then>
+        <wa:LogActivity x:TypeArguments="local1:CreateAccountActivity" DisplayName="Log name empty" sap2010:WorkflowViewState.IdRef="LogActivity`1_1" Message="Account name should not be empty.">
+          <wa:LogActivity.Loglevel>
+            <InArgument x:TypeArguments="sd:TraceEventType">
+              <mca:CSharpValue x:TypeArguments="sd:TraceEventType">System.Diagnostics.TraceEventType.Warning</mca:CSharpValue>
+            </InArgument>
+          </wa:LogActivity.Loglevel>
+        </wa:LogActivity>
+      </If.Then>
+      <If.Else>
+        <Sequence sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <wa:LogActivity x:TypeArguments="local1:CreateAccountActivity" DisplayName="Log CreateAccount requested" sap2010:WorkflowViewState.IdRef="LogActivity`1_2">
+            <wa:LogActivity.Loglevel>
+              <InArgument x:TypeArguments="sd:TraceEventType">
+                <mca:CSharpValue x:TypeArguments="sd:TraceEventType">System.Diagnostics.TraceEventType.Verbose</mca:CSharpValue>
+              </InArgument>
+            </wa:LogActivity.Loglevel>
+            <wa:LogActivity.Message>
+              <InArgument x:TypeArguments="x:String">
+                <mca:CSharpValue x:TypeArguments="x:String">$"Create Account requested for account '{Name}'."</mca:CSharpValue>
+              </InArgument>
+            </wa:LogActivity.Message>
+          </wa:LogActivity>
+          <local1:CreateAccount sap2010:WorkflowViewState.IdRef="CreateAccount_1">
+            <local1:CreateAccount.Account>
+              <OutArgument x:TypeArguments="local:Account">
+                <mca:CSharpReference x:TypeArguments="local:Account">Account</mca:CSharpReference>
+              </OutArgument>
+            </local1:CreateAccount.Account>
+            <local1:CreateAccount.Name>
+              <InArgument x:TypeArguments="x:String">
+                <mca:CSharpValue x:TypeArguments="x:String">Name</mca:CSharpValue>
+              </InArgument>
+            </local1:CreateAccount.Name>
+          </local1:CreateAccount>
+        </Sequence>
+      </If.Else>
+    </If>
+    <sads:DebugSymbol.Symbol>d1dEOlxHaXRodWJcd29ya2Zsb3ctY29tbW9uLXRvb2xzXE15V29ya2Zsb3dTZXJ2aWNlXEFjdGl2aXRpZXNcQ3JlYXRlQWNjb3VudEFjdGl2aXR5LnhhbWwNPgNsDgIBAT8FagoCAQJCC0JpAgEDRglMGgIBFU8JaBQCAQZGnwFGwgECARlJD0l/AgEWUAtbHAIBDlwLZyICAQdYEViAAQIBElMRU4EBAgEPXxFfYwIBC2QRZFMCAQg=</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="LogActivity`1_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="LogActivity`1_2" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="CreateAccount_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="222,208">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="464,358" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="486,482">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="MyWorkflowService.Activities.CreateAccountActivity_1" sap:VirtualizedContainerService.HintSize="526,562" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>
