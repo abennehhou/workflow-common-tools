@@ -81,8 +81,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activities\CreateAccount.cs" />
+    <Compile Include="ExceptionHandling\CreateFault.cs" />
     <Compile Include="DependencyInjection\DependencyInjectionBehaviorExtensionElement.cs" />
     <Compile Include="DependencyInjection\UnityTypeRegistration.cs" />
+    <Compile Include="ExceptionHandling\ProcessError.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Services\AccountService.cs" />
     <Compile Include="Services\IAccountService.cs" />
@@ -117,6 +119,12 @@
   </ItemGroup>
   <ItemGroup>
     <XamlAppDef Include="Activities\CreateAccountActivity.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </XamlAppDef>
+  </ItemGroup>
+  <ItemGroup>
+    <XamlAppDef Include="ExceptionHandling\ProcessError.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </XamlAppDef>

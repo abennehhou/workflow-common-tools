@@ -1,0 +1,113 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="MyWorkflowService.ExceptionHandling.ProcessError"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:local="clr-namespace:MyWorkflowService.ExceptionHandling"
+ xmlns:local1="clr-namespace:MyWorkflowService.Activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mca="clr-namespace:Microsoft.CSharp.Activities;assembly=System.Activities"
+ xmlns:p="http://schemas.microsoft.com/netfx/2009/xaml/servicemodel"
+ xmlns:s="clr-namespace:System;assembly=mscorlib"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:sd="clr-namespace:System.Diagnostics;assembly=System"
+ xmlns:wa="clr-namespace:WorkflowCommonTools.Activities;assembly=WorkflowCommonTools"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="Exception" Type="InArgument(s:Exception)" />
+  </x:Members>
+  <sap2010:ExpressionActivityEditor.ExpressionActivityEditor>C#</sap2010:ExpressionActivityEditor.ExpressionActivityEditor>
+  <sap2010:WorkflowViewState.IdRef>MyWorkflowService.ExceptionHandling.ProcessError_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Text</x:String>
+      <x:String>System.ServiceModel</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.CSharp</AssemblyReference>
+      <AssemblyReference>Microsoft.Practices.ServiceLocation</AssemblyReference>
+      <AssemblyReference>Microsoft.Practices.Unity</AssemblyReference>
+      <AssemblyReference>Microsoft.Practices.Unity.Configuration</AssemblyReference>
+      <AssemblyReference>Microsoft.Practices.Unity.RegistrationByConvention</AssemblyReference>
+      <AssemblyReference>System.Configuration</AssemblyReference>
+      <AssemblyReference>System.Web.DynamicData</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Web.Entity</AssemblyReference>
+      <AssemblyReference>System.Web.ApplicationServices</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Entity</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ServiceModel.Activities</AssemblyReference>
+      <AssemblyReference>System.ServiceModel.Channels</AssemblyReference>
+      <AssemblyReference>System.Web</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>WorkflowCommonTools</AssemblyReference>
+      <AssemblyReference>log4net</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>MyWorkflowService</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="p:FaultException" Name="TransformedException" />
+    </Sequence.Variables>
+    <wa:LogActivity x:TypeArguments="local:ProcessError" sap2010:WorkflowViewState.IdRef="LogActivity`1_1">
+      <wa:LogActivity.Loglevel>
+        <InArgument x:TypeArguments="sd:TraceEventType">
+          <mca:CSharpValue x:TypeArguments="sd:TraceEventType">System.Diagnostics.TraceEventType.Verbose</mca:CSharpValue>
+        </InArgument>
+      </wa:LogActivity.Loglevel>
+      <wa:LogActivity.Message>
+        <InArgument x:TypeArguments="x:String">
+          <mca:CSharpValue x:TypeArguments="x:String">$"Exception received, ready to process: '{Exception.Message}'."</mca:CSharpValue>
+        </InArgument>
+      </wa:LogActivity.Message>
+    </wa:LogActivity>
+    <local:CreateFault sap2010:WorkflowViewState.IdRef="CreateFault_1">
+      <local:CreateFault.Exception>
+        <InArgument x:TypeArguments="s:Exception">
+          <mca:CSharpValue x:TypeArguments="s:Exception">Exception</mca:CSharpValue>
+        </InArgument>
+      </local:CreateFault.Exception>
+      <local:CreateFault.FaultException>
+        <OutArgument x:TypeArguments="p:FaultException">
+          <mca:CSharpReference x:TypeArguments="p:FaultException">TransformedException</mca:CSharpReference>
+        </OutArgument>
+      </local:CreateFault.FaultException>
+    </local:CreateFault>
+    <Throw sap2010:WorkflowViewState.IdRef="Throw_1">
+      <InArgument x:TypeArguments="s:Exception">
+        <mca:CSharpValue x:TypeArguments="s:Exception">TransformedException</mca:CSharpValue>
+      </InArgument>
+    </Throw>
+    <sads:DebugSymbol.Symbol>d1VEOlxHaXRodWJcd29ya2Zsb3ctY29tbW9uLXRvb2xzXE15V29ya2Zsb3dTZXJ2aWNlXEV4Y2VwdGlvbkhhbmRsaW5nXFByb2Nlc3NFcnJvci54YW1sCT8DYQ4CAQFDBU4WAgENTwVaGgIBBlsFXw0CAQJLC0uIAQIBEUYLRnsCAQ5SC1JVAgEKVwtXbQIBB10JXV4CAQM=</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="LogActivity`1_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="CreateFault_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="Throw_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="222,270">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="MyWorkflowService.ExceptionHandling.ProcessError_1" sap:VirtualizedContainerService.HintSize="240,179" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>
